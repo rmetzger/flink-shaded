@@ -34,7 +34,7 @@ under the License.
 	<name>flink-shaded-hadoop-3-uber</name>
 
 	<packaging>jar</packaging>
-	<version>${hadoop.version}-11.0</version>
+	<version>${hadoop.three.version}-11.0</version>
 
 	<!--
 		the only dependency of the 'flink-shaded-hadoop-2' artifact, out
@@ -45,7 +45,7 @@ under the License.
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-shaded-hadoop-3</artifactId>
-			<version>${hadoop.version}-11.0</version>
+			<version>${hadoop.three.version}-11.0</version>
 		</dependency>
 	</dependencies>
 

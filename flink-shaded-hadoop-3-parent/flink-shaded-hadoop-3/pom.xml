@@ -33,7 +33,31 @@ under the License.
 	<name>flink-shaded-hadoop-3</name>
 
 	<packaging>jar</packaging>
-	<version>${hadoop.version}-11.0</version>
+	<version>${hadoop.three.version}-11.0</version>
+
+	<dependencyManagement>
+		<dependencies>
+			<!--
+				The dependency reduced pom will otherwise not converge
+
+				Dependency convergence error for com.nimbusds:nimbus-jose-jwt:4.41.1 paths to dependency are:
+					+-org.apache.flink:flink-bucketing-sink-test:1.11-SNAPSHOT
+					  +-org.apache.flink:flink-shaded-hadoop-3:3.1.3-11.0
+					    +-com.nimbusds:nimbus-jose-jwt:4.41.1
+					and
+					+-org.apache.flink:flink-bucketing-sink-test:1.11-SNAPSHOT
+					  +-org.apache.flink:flink-shaded-hadoop-3:3.1.3-11.0
+					    +-org.apache.kerby:token-provider:1.0.1
+					      +-com.nimbusds:nimbus-jose-jwt:3.10
+
+			-->
+			<dependency>
+				<groupId>com.nimbusds</groupId>
+				<artifactId>nimbus-jose-jwt</artifactId>
+				<version>4.41.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<!-- drop dependencies that are already provided by Flink from the shaded / uber jars -->
@@ -64,7 +88,7 @@ under the License.
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-common</artifactId>
-			<version>${hadoop.version}</version>
+			<version>${hadoop.three.version}</version>
 			<exclusions>
 				<exclusion>
 					<!-- This dependency is no longer shipped with the JDK since Java 9.-->
@@ -198,7 +222,7 @@ under the License.
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-hdfs</artifactId>
-			<version>${hadoop.version}</version>
+			<version>${hadoop.three.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>asm</groupId>
@@ -314,7 +338,7 @@ under the License.
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-mapreduce-client-core</artifactId>
-			<version>${hadoop.version}</version>
+			<version>${hadoop.three.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>asm</groupId>
@@ -438,7 +462,7 @@ under the License.
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-yarn-client</artifactId>
-			<version>${hadoop.version}</version>
+			<version>${hadoop.three.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>asm</groupId>
@@ -566,7 +590,7 @@ under the License.
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-yarn-common</artifactId>
-			<version>${hadoop.version}</version>
+			<version>${hadoop.three.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>asm</groupId>
@@ -709,7 +733,7 @@ under the License.
 				<dependency>
 					<groupId>org.apache.hadoop</groupId>
 					<artifactId>hadoop-common</artifactId>
-					<version>${hadoop.version}</version>
+					<version>${hadoop.three.version}</version>
 					<exclusions>
 						<!--
 							for MapR builds, we additionally exclude the MapR dependencies to not be
@@ -911,6 +935,7 @@ under the License.
 									<include>com.google.guava:*</include>
 									<include>com.google.protobuf:*</include>
 									<include>com.google.code.findbugs:*</include>
+									<include>com.google.re2j:*</include>
 									<include>asm:asm</include>
 									<include>io.netty:netty:*</include>
 									<include>io.netty:netty-all:*</include>

@@ -38,7 +38,7 @@ under the License.
         <!-- never use this in the parent module; otherwise it would need to be versioned by hadoop version; this must
             not be done since the parent reference in child modules must not have dynamic elements as otherwise it
             cannot be resolved -->
-        <hadoop.version>2.4.1</hadoop.version>
+        <hadoop.two.version>2.4.1</hadoop.two.version>
         <!-- pinned transitive dependencies-->
         <avro.version>1.8.2</avro.version>
         <slf4j.version>1.7.15</slf4j.version>
